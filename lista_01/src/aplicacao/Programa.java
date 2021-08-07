@@ -31,6 +31,13 @@ public class Programa {
 			System.out.println("Funcionário #" + (i + 1));
 			System.out.print("Id: ");
 			int id = sc.nextInt();
+			
+			while(func.verificarId(lista, id) == true) {
+				System.out.println("Id já cadastrado!");
+				System.out.print("Id: ");
+				id = sc.nextInt();
+			}
+			
 			System.out.print("Nome: ");
 			sc.nextLine();
 			String nome = sc.nextLine();
@@ -42,7 +49,23 @@ public class Programa {
 		}
 		
 		System.out.println();
-		System.out.println("     Lista de Funcionários     ");
+		System.out.print("Id do funcionario que receberá o aumento: ");
+		int idAumento = sc.nextInt();
+		
+		func = lista.stream().filter(x -> x.getId() == idAumento).findFirst().orElse(null);
+		
+		if(func == null) {
+			System.out.println();
+			System.out.println("Id não cadastrado!");
+		}else {
+			System.out.print("Porcentagem do aumento: ");
+			double taxa = sc.nextDouble();
+			func.aumentoSalarial(taxa);
+		}
+			
+		
+		System.out.println();
+		System.out.println("          Lista de Funcionários     ");
 		for(Funcionarios x: lista) {
 			System.out.println(x);
 		}

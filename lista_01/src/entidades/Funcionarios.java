@@ -3,6 +3,8 @@
  */
 package entidades;
 
+import java.util.List;
+
 /**
  * @author leo_dias
  *
@@ -52,7 +54,16 @@ public class Funcionarios {
 				+ String.format("%.2f", salario);
 	}
 	
+	public Boolean verificarId(List<Funcionarios> lista, int id) {
+		Funcionarios func = lista.stream().filter(x -> x.id == id).findFirst().orElse(null);
+		return func != null;
+	}
 	
+	public double aumentoSalarial(double taxa) {
+		return salario += salario * taxa / 100;
+	}
+	
+	 
 	
 	
 	
